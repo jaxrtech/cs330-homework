@@ -1,0 +1,310 @@
+\documentclass[11pt]{article}
+ 
+\usepackage[margin=0.75in, nomarginpar]{geometry} 
+\usepackage{layout}
+\usepackage[fleqn]{amsmath}
+\usepackage{amsthm,amssymb}
+\usepackage{xparse}
+\usepackage[shortlabels]{enumitem}
+\usepackage{titling}
+\usepackage{etoolbox}
+
+%%
+
+\NewDocumentEnvironment{problem}{s O{Problem} m o}
+  {\begin{trivlist}
+     \item[\hskip \labelsep {\bfseries #2}\hskip \labelsep {\bfseries #3.}]
+     \IfValueTF{#4}
+       {#4 \IfBooleanT{#1}{\hspace*{\fill}\\}}
+       {\hspace*{\fill}\\}
+  }
+  {\end{trivlist}}
+
+\newenvironment{quoted}
+  {\quote\makebox[0pt][r]{``}\ignorespaces}
+  {\unskip''\endquote}
+
+\let\tt\text
+\let\bicond\leftrightarrow
+\let\cond\rightarrow
+
+\setlength{\topskip}{0cm}
+\setlength{\droptitle}{-1.25cm}
+
+% restart equation numbering each block
+% http://tex.stackexchange.com/a/261982/44533
+\preto\equation{\setcounter{equation}{0}}
+\makeatletter
+\pretocmd\start@gather{\setcounter{equation}{0}}{}{}
+\pretocmd\start@align{\setcounter{equation}{0}}{}{}
+\pretocmd\start@multline{\setcounter{equation}{0}}{}{}
+\makeatother
+
+%%
+
+\begin{document}
+
+\title{Homework 1}
+\author{Josh Bowden\vspace*{8pt}\\
+CS 330 - Discrete Structures\\
+Prof Sasaki}
+
+\date{January 27, 2016}
+
+\maketitle
+
+\begin{problem}*{1}[Express each of these propositions as an English sentence.]
+$p$: I bought a lottery ticket this week \\
+$q$: I won the million-dollar jackpot
+
+\begin{enumerate}[(a)]
+\item $\neg p \\ \equiv$ I did not buy a lottery ticket this week.
+
+\item $p \land q \\ \equiv$ I bought a lottery ticket this week, and I won the million-dollar jackpot.
+
+\item $\neg p \land \neg q \\ \equiv$ I did not buy a lottery ticket this week, and I did not win the million-dollar jackpot.
+
+\item $p \lor q \\ \equiv$ Either, I bought a lottery ticket this week, or I won the million-dollar jackpot.
+
+\item $p \bicond q \\ \equiv$ I bought a lottery ticket this week if and only if I won the million-dollar jackpot.
+
+\item $\neg p \lor (p \land q) \\ \equiv$ Either, I did not buy a lottery ticket this week, or not only did I buy a lottery ticket this week but also won the million-dollar jackpot.
+
+\item $p \cond q \\ \equiv$ If I bought a lottery ticket this week, then I won the million-dollar jackpot.
+
+\item $\neg p \cond \neg q \\ \equiv$ If I did not buy a lottery ticket this week, then I did not win the million-dollar jackpot.
+
+\end{enumerate}
+\end{problem}
+
+\vspace*{0pt}
+
+\begin{problem}{2}[Write each of these statements in the form ``if $p$, then $q$'' in English.]
+\begin{enumerate}[(a)]
+\item It is necessary to wash the boss's car to get promoted.\\
+  $\equiv$ If you got promoted, then you washed the boss's car.
+  
+\item Winds from the south imply a spring thaw.\\
+  $\equiv$ If there are winds from the south, then there is a spring thaw.
+  
+\item A sufficient condition for the warranty to be good is that you bought the computer less than a year ago.\\
+  $\equiv$ If the warranty is good, then you bought the computer less than a year ago.
+  
+\item Willy gets caught whenever he cheats.\\
+  $\equiv$ If Willy cheats, then he gets caught.
+  
+\end{enumerate}
+\end{problem}
+
+\vspace*{0pt}
+
+\begin{problem}{3}[Are these system specifications consistent?]
+
+\begin{quoted}
+  Whenever the system software is being upgraded, users cannot access the file system.\\
+  If users can access the file system, then they can save new files.\\
+  If users cannot save new files, then the system software is not being upgraded.
+\end{quoted}
+
+\vspace*{-5mm}
+
+\begin{flalign*}
+& \tt{upgrade} \cond \neg \tt{access} \\
+& \tt{access} \cond \tt{save}  \tag*{Hypothesis} \\
+& \neg \tt{save} \cond \neg \tt{upgrade} \\
+%
+& \equiv
+  (\tt{upgrade} \cond \neg \tt{access}) 
+  \land (\tt{access} \cond \tt{save})
+  \land (\neg \tt{save} \cond \neg \tt{upgrade})  \tag*{Hypothesis (rewritten)} \\
+%
+& \equiv
+  (\neg \tt{upgrade} \lor \neg \tt{access})
+  \land (\neg \tt{access} \lor \tt{save})
+  \land (\neg \neg \tt{save} \lor \neg \tt{upgrade}) \tag*{Conditional identity} \\
+%
+& \equiv
+  (\neg \tt{upgrade} \lor \neg \tt{access})
+  \land (\neg \tt{access} \lor \tt{save})
+  \land (\tt{save} \lor \neg \tt{upgrade}) \tag*{Double negation law} \\
+\end{flalign*}
+
+No, the system specification is \textit{not} consistent.
+
+\end{problem}
+
+\vspace*{0pt}
+
+\begin{problem}{4}[Without using truth tables, show that $p \bicond q$ and $(p \bicond q) \land (q \bicond p)$ are logically equivalent.]
+
+$p \bicond q \equiv (p \bicond q) \land (q \bicond p)$ by the Conditional identity
+
+\end{problem}
+
+\vspace*{0pt}
+
+\begin{problem}{5}[Determine if the following argument is correct or not and show in detail why.]
+\begin{quoted}
+If I play baseball, then I am sore. I use the swimming pool if I am sore. I did not use the swimming pool.
+Therefore, I did play baseball.
+\end{quoted}
+
+This argument is not correct, because even though they did not use the swimming pool, there is no implication that they were sore to imply that they played baseball.
+
+\end{problem}
+
+\vspace*{0pt}
+
+\begin{problem}{6}
+Let $C(x)$ be the statement ``x has a cat'', let $D(x)$ be the statement ``x has a dog'', and $F(x)$ be the statement ``x has a ferret''. \\
+Express each of these statements in terms of $C(x)$, $D(x)$, $F(x)$, quantifiers, and logical connectives. \\
+Let the domain consist of all students in your class.
+
+\begin{enumerate}[(a)]
+\item A student in your class has a cat, a dog, and a ferret. \\ 
+  $\equiv \exists x \, (C(x) \land D(x) \land F(x))$ 
+
+\item All students in your class have a cat, a dog, and a ferret. \\ 
+  $\equiv \forall x \, (C(x) \land D(x) \land F(x))$ 
+
+\item Some student in your class has a cat and a ferret, but not a dog. \\ 
+  $\equiv \exists x \, (C(x) \land F(x) \land \neg D(x) )$ 
+  
+\item No student in your class has a cat, a dog, or a ferret. \\ 
+  $\equiv \neg \exists x \, (C(x) \lor D(x) \lor F(x))$ 
+  
+\item For each of the three animals, cats, dogs, and ferrets, there is a student in your class who has this animal as a pet. \\ 
+  $\equiv (\exists x \, C(x)) \land (\exists x \, D(x)) \land (\exists x \, F(x))$
+  
+\end{enumerate}
+\end{problem}
+
+\vspace*{0pt}
+
+\begin{problem}{7}[Determine the truth value of each of these statements if the domain of each variable consists of all real numbers.]
+
+\begin{enumerate}[(a)]
+\item $\exists x \, (x^2 = 2) \\ \equiv \tt{T} \ (\textrm{since } x = \sqrt{2})$
+\item $\exists x \, (x^2 = -1) \\ \equiv \tt{F} \ (\textrm{since } x \not\in \mathbb{I})$
+\item $\forall x \, (x^2 + 2 \geq 1) \\ \equiv \tt{T} \ (\textrm{since } x^2 \geq -1)$
+\item $\forall x \, (x^2 \neq x) \\ \equiv \tt{F} \ (\textrm{since } x = 1)$
+\end{enumerate}
+\end{problem}
+
+\vspace*{0pt}
+
+\begin{problem}{8}
+Let $Q(x, y)$ be the statement ``student x has been a contestant on quiz show y.'' 
+Express each of these sentences in terms of $Q(x, y)$, quantifiers, and logical connectives where the domain for x consists of all students at your school and the domain y consists of all quiz shows on television.
+
+\begin{enumerate}[(a)]
+\item There is a student at your school who has been a contestant on a television quiz show. \\
+  $\equiv \exists x \, \exists y \ Q(x, y)$
+
+\item No student at your school has ever been a contestant on a television quiz show. \\
+  $\equiv \neg (\exists x \, \exists y \ Q(x, y))$
+
+\item There is a student at your school who has been a contestant on Jeopardy and on Wheel of Fortune. \\
+  $\equiv \exists x \ (Q(x, \textrm{Jeopardy}) \land Q(x, \textrm{Wheel of Fortune}))$
+
+\item Every television quiz show has had a student from your school as a contestant. \\
+  $\equiv \forall y \, \exists x \ Q(x, y)$
+
+\item At least two students from your school have been a contestant on Jeopardy. \\
+  $\equiv \exists x_1 \, \exists x_2 \ (\neg (x_1 \bicond x_2) \land Q(x_1, \textrm{Jeoparty}) \land Q(x_2, \textrm{Jeoparty}))$
+
+\end{enumerate}
+
+\end{problem}
+
+\vspace*{0pt}
+
+\begin{problem}{9}
+For each of these sets of premises, what relevant conclusion or conclusions can be drawn? \\
+Explain the rules of inference used to obtain each conclusion from the premises.
+
+\begin{enumerate}[(a)]
+\item
+  ``If I play hockey, then I am sore the next day.'' \\
+  ``I use the whirlpool if I am sore.'' \\
+  ``I did not use the whirlpool.''
+
+\vspace*{-7mm}
+
+\begin{flalign}
+& \tt{play hockey} \cond \tt{sore} \\
+& \tt{sore} \cond \tt{use whirlpool} \\
+& \neg (\tt{use whirlpool}) \\[-5pt]
+& \cline{1-1}
+& \therefore \tt{play hockey} \cond \tt{use whirlpool}  \hspace{0.5cm}\text{(Hypothetical syllogism, 1, 2)} \\
+& \therefore \neg (\tt{play hockey})  \hspace{0.5cm}\text{(Modus tollens, 4, 3)}
+\end{flalign}
+
+
+\item
+  ``If I work, it is either sunny or partly sunny.'' \\
+  ``I worked last Monday or I worked last Friday.'' \\
+  ``It was not sunny on Tuesday.'' \\
+  ``It was not partly sunny on Friday.''
+  
+\vspace*{-7mm}
+
+\begin{flalign}
+& \forall day \, (%
+    \tt{Work}(day) \cond (%
+      \tt{Weather}(day, \text{sunny})
+      \lor \tt{Weather}(day, \text{partly sunny})
+    )%
+  )%
+  \\
+& \tt{Work}(\text{Monday}) \lor \tt{Work}(\text{Friday}) \\
+& \neg \tt{Weather}(\text{Tuesday}, \text{sunny}) \\
+& \neg \tt{Weather}(\text{Friday}, \text{partly sunny}) \\[-5pt]
+& \cline{1-1}
+& \therefore
+    \tt{Weather}(\text{Friday}, \text{sunny}) \hspace{0.5cm}\text{(Disjunctive syllogism, 1, 4)}
+\end{flalign}
+
+
+\item
+  ``All insects have six legs.'' \\
+  ``Dragonflies are insects.'' \\ 
+  ``Spiders do not have six legs. \\
+  ``Spiders eat dragonflies.''
+  
+\vspace*{-7mm}
+  
+\begin{flalign}
+& \forall x \, (\tt{Insect}(x) \cond (\tt{Legs}(x) = 6)) \\
+& \tt{Insect}(\tt{dragonfly}) \\
+& \tt{Legs}(\tt{spider}) \neq 6 \\
+& \tt{Eat}(\tt{spider}, \tt{dragonfly}) \\[-5pt]
+& \cline{1-1}
+& \therefore
+    \tt{Legs}(\tt{dragonfly}) = 6  \hspace{0.5cm}\text{(Modus ponens, 1, 2)} \\
+& \therefore
+    \neg \tt{Insect}(\tt{spider})  \hspace{0.5cm} \text{(Modus tollens, 1, 3)}
+\end{flalign}
+
+\item
+  ``Every student has an Internet account.'' \\
+  ``Homer does not have an Internet account.'' \\
+  ``Maggie has an Internet account.''
+
+\vspace*{-7mm}
+
+\begin{flalign}
+& \forall x \, (\tt{Student}(x) \cond \tt{Internet}(x)) \\
+& \neg \tt{Internet}(\tt{Homer}) \\
+& \tt{Internet}(\tt{Maggie}) \\[-5pt]
+& \cline{1-1}
+& \therefore
+    \neg \tt{Student}(\tt{Homer})  \hspace{0.5cm}\text{(Modus tollens, 1, 2)} \\
+& \therefore
+    \tt{Student}(\tt{Maggie})  \hspace{0.5cm}\text{(Modus tollens, 1, 3)}
+\end{flalign}
+
+\end{enumerate}
+\end{problem}
+
+\end{document}
