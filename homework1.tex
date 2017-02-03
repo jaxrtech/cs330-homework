@@ -1,46 +1,4 @@
-\documentclass[11pt]{article}
- 
-\usepackage[margin=0.75in, nomarginpar]{geometry} 
-\usepackage{layout}
-\usepackage[fleqn]{amsmath}
-\usepackage{amsthm,amssymb}
-\usepackage{xparse}
-\usepackage[shortlabels]{enumitem}
-\usepackage{titling}
-\usepackage{etoolbox}
-
-%%
-
-\NewDocumentEnvironment{problem}{s O{Problem} m o}
-  {\begin{trivlist}
-     \item[\hskip \labelsep {\bfseries #2}\hskip \labelsep {\bfseries #3.}]
-     \IfValueTF{#4}
-       {#4 \IfBooleanT{#1}{\hspace*{\fill}\\}}
-       {\hspace*{\fill}\\}
-  }
-  {\end{trivlist}}
-
-\newenvironment{quoted}
-  {\quote\makebox[0pt][r]{``}\ignorespaces}
-  {\unskip''\endquote}
-
-\let\tt\text
-\let\bicond\leftrightarrow
-\let\cond\rightarrow
-
-\setlength{\topskip}{0cm}
-\setlength{\droptitle}{-1.25cm}
-
-% restart equation numbering each block
-% http://tex.stackexchange.com/a/261982/44533
-\preto\equation{\setcounter{equation}{0}}
-\makeatletter
-\pretocmd\start@gather{\setcounter{equation}{0}}{}{}
-\pretocmd\start@align{\setcounter{equation}{0}}{}{}
-\pretocmd\start@multline{\setcounter{equation}{0}}{}{}
-\makeatother
-
-%%
+\documentclass{homework}
 
 \begin{document}
 
@@ -77,8 +35,6 @@ $q$: I won the million-dollar jackpot
 \end{enumerate}
 \end{problem}
 
-\vspace*{0pt}
-
 \begin{problem}{2}[Write each of these statements in the form ``if $p$, then $q$'' in English.]
 \begin{enumerate}[(a)]
 \item It is necessary to wash the boss's car to get promoted.\\
@@ -96,7 +52,6 @@ $q$: I won the million-dollar jackpot
 \end{enumerate}
 \end{problem}
 
-\vspace*{0pt}
 
 \begin{problem}{3}[Are these system specifications consistent?]
 
@@ -105,8 +60,6 @@ $q$: I won the million-dollar jackpot
   If users can access the file system, then they can save new files.\\
   If users cannot save new files, then the system software is not being upgraded.
 \end{quoted}
-
-\vspace*{-5mm}
 
 \begin{flalign*}
 & \tt{upgrade} \cond \neg \tt{access} \\
@@ -133,15 +86,12 @@ No, the system specification is \textit{not} consistent.
 
 \end{problem}
 
-\vspace*{0pt}
-
 \begin{problem}{4}[Without using truth tables, show that $p \bicond q$ and $(p \bicond q) \land (q \bicond p)$ are logically equivalent.]
 
 $p \bicond q \equiv (p \bicond q) \land (q \bicond p)$ by the Conditional identity
 
 \end{problem}
 
-\vspace*{0pt}
 
 \begin{problem}{5}[Determine if the following argument is correct or not and show in detail why.]
 \begin{quoted}
@@ -153,7 +103,6 @@ This argument is not correct, because even though they did not use the swimming 
 
 \end{problem}
 
-\vspace*{0pt}
 
 \begin{problem}{6}
 Let $C(x)$ be the statement ``x has a cat'', let $D(x)$ be the statement ``x has a dog'', and $F(x)$ be the statement ``x has a ferret''. \\
@@ -179,7 +128,6 @@ Let the domain consist of all students in your class.
 \end{enumerate}
 \end{problem}
 
-\vspace*{0pt}
 
 \begin{problem}{7}[Determine the truth value of each of these statements if the domain of each variable consists of all real numbers.]
 
@@ -191,7 +139,6 @@ Let the domain consist of all students in your class.
 \end{enumerate}
 \end{problem}
 
-\vspace*{0pt}
 
 \begin{problem}{8}
 Let $Q(x, y)$ be the statement ``student x has been a contestant on quiz show y.'' 
@@ -217,7 +164,6 @@ Express each of these sentences in terms of $Q(x, y)$, quantifiers, and logical 
 
 \end{problem}
 
-\vspace*{0pt}
 
 \begin{problem}{9}
 For each of these sets of premises, what relevant conclusion or conclusions can be drawn? \\
@@ -228,8 +174,6 @@ Explain the rules of inference used to obtain each conclusion from the premises.
   ``If I play hockey, then I am sore the next day.'' \\
   ``I use the whirlpool if I am sore.'' \\
   ``I did not use the whirlpool.''
-
-\vspace*{-7mm}
 
 \begin{flalign}
 & \tt{play hockey} \cond \tt{sore} \\
@@ -246,8 +190,6 @@ Explain the rules of inference used to obtain each conclusion from the premises.
   ``I worked last Monday or I worked last Friday.'' \\
   ``It was not sunny on Tuesday.'' \\
   ``It was not partly sunny on Friday.''
-  
-\vspace*{-7mm}
 
 \begin{flalign}
 & \forall day \, (%
@@ -272,8 +214,6 @@ Explain the rules of inference used to obtain each conclusion from the premises.
   ``Spiders do not have six legs. \\
   ``Spiders eat dragonflies.''
   
-\vspace*{-7mm}
-  
 \begin{flalign}
 & \forall x \, (\tt{Insect}(x) \cond (\tt{Legs}(x) = 6)) \\
 & \tt{Insect}(\tt{dragonfly}) \\
@@ -286,13 +226,12 @@ Explain the rules of inference used to obtain each conclusion from the premises.
     \neg \tt{Insect}(\tt{spider})  \hspace{0.5cm} \text{(Modus tollens, 1, 3)}
 \end{flalign}
 
+
 \item
   ``Every student has an Internet account.'' \\
   ``Homer does not have an Internet account.'' \\
   ``Maggie has an Internet account.''
-
-\vspace*{-7mm}
-
+  
 \begin{flalign}
 & \forall x \, (\tt{Student}(x) \cond \tt{Internet}(x)) \\
 & \neg \tt{Internet}(\tt{Homer}) \\
