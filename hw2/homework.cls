@@ -11,12 +11,14 @@
 \RequirePackage[shortlabels]{enumitem}
 \RequirePackage{titling}
 \RequirePackage{etoolbox}
+\RequirePackage{scrextend}
 
-\edef\restoreparindent{\parindent=\the\parindent\relax}
+%\edef\restoreparindent{\parindent=\the\parindent\relax}
 \RequirePackage{parskip}
-\restoreparindent
+%\restoreparindent
 
 \newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
 
 %%
 
@@ -27,8 +29,11 @@
      \IfValueTF{#4}
        {#4 \IfBooleanT{#1}{\hspace*{\fill}\\}}
        {\hspace*{\fill}\\}
+    \begin{addmargin}[2em]{0em} % 1em left, 0em right
   }
-  {\end{trivlist}}
+  {\end{addmargin}
+   \end{trivlist}
+   \vspace*{2em}}
 
 \newenvironment{quoted}
   {\quote\makebox[0pt][r]{``}\ignorespaces}
@@ -40,6 +45,7 @@
 
 \setlength{\topskip}{0cm}
 \setlength{\droptitle}{-1.25cm}
+\everypar{\setlength\hangindent{1em}}
 
 % restart equation numbering each block
 % http://tex.stackexchange.com/a/261982/44533

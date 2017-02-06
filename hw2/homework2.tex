@@ -14,23 +14,30 @@ Professor Sasaki}
 \noindent
 Prove the following statements. Show and explain \textbf{ALL} your work. Unless otherwise specified, give direct proofs.
 
+
 \begin{problem}{1}[The sum of two even integers is always even.]
 
-Let $a$ and $b$ be integers.
+\begin{proof}If $a$ and $b$ are even integers, then $a + b$ is an even integer.
 
-Assume $a$ and $b$ are even.
+Assume $a$ and $b$ are even integers.
 
 Then by definition,\\
-\indent\indent $a = 2m$ where $m$ is an integer,\\
-\indent\indent $b = 2n$ where $n$ is an integer.
-
-Then,\\
 \begin{flalign*}
-a + b &= (2m) + (2n)\\
- &= 2(m + n)
+a &= 2m \text{ where } m \in \Z,\\
+b &= 2n \text{ where } n \in \Z.
 \end{flalign*}
 
-Therefore $a + b$ is even by definition.
+Then,
+
+\begin{flalign*}
+a + b &= (2m) + (2n)\\
+ &= 2(m + n),
+\end{flalign*}
+
+and $2(m + n)$ is an even integer by definition.
+
+Therefore, $a + b$ is even by definition.
+\end{proof}
 \end{problem}
 
 %%
@@ -42,8 +49,7 @@ Therefore $a + b$ is even by definition.
 \text{Contrapositive} &: \forall n \in \Z \, (n \text{ even} \cond  n^2 \text{ even} )
 \end{flalign*}
 
-\vspace*{-5mm}
-\hrulefill
+\begin{proof} $\forall n \in \Z \, (n \text{ even} \cond  n^2 \text{ even})$
 
 Let $n$ be an integer.
 
@@ -51,27 +57,100 @@ Assume $n$ is even.
 
 Then by definition, $n = 2k$ where $k \in \Z$.
 
-So $n^2 = (2k)^2 = (4)(k \cdot k) = 2k \cdot 2k$.
+So,
+
+\begin{flalign*}
+n^2 &= (2k)^2 
+&= (4)(k \cdot k)
+&= 2k \cdot 2k.
+\end{flalign*}
 
 And two even integers multiplied are always even.
 
-Therefore $n^2$ is even.
-
+Therefore, $n^2$ is even.
+\end{proof}
 \end{problem}
 
 %%
+
+\break
 
 \begin{problem}{3}[Prove that if the sum of the digits of a 3-digit number $n$ is divisible by 9, then $n$ is divisible by 9.]
 
-TODO
+\begin{proof}If the sum of the digits of a 3-digit number $n$ is divisible by 9, then $n$ is divisible by 9.
 
+Let $n$ be an integer.
+
+Assume that $n$ is a 3-digit number such that $n \geq 100 \land n \leq 999$.
+
+$n$ can be represented by its digits as,
+
+\begin{flalign*}
+n &= n_3(100) + n_2(10) + n_1(1).
+\end{flalign*}
+
+Then, by rearranging the previous expression,
+
+\begin{flalign*}
+n &= n_3(1 + 99) + n_2(1 + 9) + n_1 && 100 = 1 + 99\\
+&= n_3 + n_3(99) + n_2 + n_2(9) + n_1 && \text{Distributive property of multiplication}\\
+&= n_3(99) + n_2(9) + n_3 + n_2 + n_1 && \text{Associative property of addition}.
+\end{flalign*}
+
+Since divisibility is defined as $a/b={c}$ where $a, b, c \in \Z$, and
+
+\begin{flalign*}
+\frac{n_3(99)}{9} &= n_3(11) \text{ and } n_3(11) \in \Z,\\
+\frac{n_2(9)}{9} &= n_2(1) \text{ and } n_2(1) \in \Z,
+\end{flalign*}
+
+so the terms $n_3(99)$ and $n_2(9)$ must be divisible by 9.
+
+Then, $n$ is divisible by 9 if the remaining terms ($n_3, n_2, n_1$) sum such that,\\
+\begin{flalign*}
+\frac{n_3 + n_2 + n_1}{9} = k \; (\text{where } k \in \Z)
+\end{flalign*}
+
+Then, if all terms are divisible by 9, the sum of those terms must be divisble by 9.
+
+Therefore, if $(n_3 + n_2 + n_1) / 9 = k \; (\text{where } k \in \Z)$, then $n$ is divisible by 9.
+\end{proof}
 \end{problem}
 
 %%
 
+\break
+
 \begin{problem}{4}[Prove by contradiction that the product of two odd numbers is odd.]
 
-TODO
+\everypar{\setlength\hangindent{1em}}
+\begin{proof}$(\forall m \in \Z) (\forall n \in Z) \, ((m \text{ odd} \land n \text{ odd}) \cond ((m \cdot n) \text{ odd}))$ 
+
+Let $m$ and $n$ be integers.
+
+Assume $m$ and $n$ are odd.
+
+To prove by contradition, assume $m \cdot n$ is even.
+
+Then by definition, $mn = 2k$ for some integer $k$.
+
+So,
+
+\begin{flalign*}
+2k + 1 &= mn\\
+2k &= mn - 1\\
+k &= \frac{mn - 1}{2}\\
+k &= mn - \frac{1}{2}
+\end{flalign*}
+
+Then, $k$ is a rational number and not an integer ($k \in \mathbb{Q} \land k \not\in \Z$), \\
+since $mn$ is an integer, given that the product of two integers is an integer,\\
+and subtracting $1/2$ from an integer will result in a rational number.
+
+This is a contradition since $k$ was assumed to be an integer.
+
+Therefore, $m \cdot n$ cannot be even.
+\end{proof}
 
 \end{problem}
 
@@ -79,7 +158,32 @@ TODO
 
 \begin{problem}{5}[Prove that the product of two rational numbers is rational.]
 
-TODO
+\begin{proof}$(\forall p \in \Q) (\forall q \in \Q) \, ((p \cdot q) \in \Q)$
+
+Let $p$ and $q$ be rational numbers.
+
+Then by definition,
+
+\begin{flalign*}
+p &= \frac{a}{b}\\
+q &= \frac{c}{d},
+\end{flalign*}
+
+where $\{a, b, c, d\} \in \Z$.
+
+Then,
+
+\begin{flalign*}
+p \cdot q &= \frac{a}{b} \cdot \frac{c}{d} \\
+&= \frac{ab}{cd}.
+\end{flalign*}
+
+Then $\{ab, cd\} \in \Z$ since the product of two integers is an integer.
+
+So then, $\frac{ab}{cd}$ is a rational number.
+
+Therefore, the product of two rational numbers is rational.
+\end{proof}
 
 \end{problem}
 
