@@ -45,8 +45,8 @@ Therefore, $a + b$ is even by definition.
 \begin{problem}{2}[State the contrapositive of (for all integers $n$, if $n^2$ is odd, then $n$ is odd) and prove it.]
 
 \begin{flalign*}
-\text{Given} &: \forall n \in \Z \, (n^2 \text{ odd} \cond n \text{ odd})\\
-\text{Contrapositive} &: \forall n \in \Z \, (n \text{ even} \cond  n^2 \text{ even} )
+\text{Given}\!&: \forall n \in \Z \, (n^2 \text{ odd} \cond n \text{ odd})\\
+\text{Contrapositive}\!&: \forall n \in \Z \, (n \text{ even} \cond  n^2 \text{ even} )
 \end{flalign*}
 
 \begin{proof} $\forall n \in \Z \, (n \text{ even} \cond  n^2 \text{ even})$
@@ -60,8 +60,8 @@ Then by definition, $n = 2k$ where $k \in \Z$.
 So,
 
 \begin{flalign*}
-n^2 &= (2k)^2 
-&= (4)(k \cdot k)
+n^2 &= (2k)^2 \\
+&= (4)(k \cdot k) \\
 &= 2k \cdot 2k.
 \end{flalign*}
 
@@ -106,12 +106,13 @@ Since divisibility is defined as $a/b={c}$ where $a, b, c \in \Z$, and
 
 so the terms $n_3(99)$ and $n_2(9)$ must be divisible by 9.
 
-Then, $n$ is divisible by 9 if the remaining terms ($n_3, n_2, n_1$) sum such that,\\
+Then, $n$ is divisible by 9 if the remaining terms ($n_3, n_2, n_1$) sum such that,
+
 \begin{flalign*}
 \frac{n_3 + n_2 + n_1}{9} = k \; (\text{where } k \in \Z)
 \end{flalign*}
 
-Then, if all terms are divisible by 9, the sum of those terms must be divisble by 9.
+Then, if all terms are divisible by 9, the sum of those terms must be divisible by 9.
 
 Therefore, if $(n_3 + n_2 + n_1) / 9 = k \; (\text{where } k \in \Z)$, then $n$ is divisible by 9.
 \end{proof}
@@ -130,7 +131,7 @@ Let $m$ and $n$ be integers.
 
 Assume $m$ and $n$ are odd.
 
-To prove by contradition, assume $m \cdot n$ is even.
+To prove by contradiction, assume $m \cdot n$ is even.
 
 Then by definition, $mn = 2k$ for some integer $k$.
 
@@ -147,7 +148,7 @@ Then, $k$ is a rational number and not an integer ($k \in \mathbb{Q} \land k \no
 since $mn$ is an integer, given that the product of two integers is an integer,\\
 and subtracting $1/2$ from an integer will result in a rational number.
 
-This is a contradition since $k$ was assumed to be an integer.
+This is a contradiction since $k$ was assumed to be an integer.
 
 Therefore, $m \cdot n$ cannot be even.
 \end{proof}
