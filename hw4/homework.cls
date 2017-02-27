@@ -18,9 +18,19 @@
 \RequirePackage{parskip}
 %\restoreparindent
 
+\newcommand{\Mod}[1]{\ (\text{mod}\ #1)}
+
+\newcommand{\R}{\mathbb{R}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\N}{\mathbb{N}}
+
+\newcommand{\T}{\text{T}}
+
+\let\tt\text
+\let\bicond\leftrightarrow
+\let\cond\rightarrow
+\let\then\Longleftrightarrow % same as `\implies`
 
 %%
 
@@ -40,10 +50,6 @@
 \newenvironment{quoted}
   {\quote\makebox[0pt][r]{``}\ignorespaces}
   {\unskip''\endquote}
-
-\let\tt\text
-\let\bicond\leftrightarrow
-\let\cond\rightarrow
 
 \setlength{\topskip}{0cm}
 \setlength{\droptitle}{-1.25cm}
