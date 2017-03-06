@@ -1,0 +1,400 @@
+\documentclass{homework}
+
+\usepackage[T1]{fontenc}
+\usepackage{inconsolata}
+
+\lstset{
+  basicstyle=\ttfamily,
+  mathescape,         
+  literate={->}{$\rightarrow$}{2}
+           {ε}{$\varepsilon$}{1}
+}
+
+\begin{document}
+
+\title{Homework 4}
+\author{Josh Bowden\vspace*{8pt}\\
+CS 330 - Discrete Structures - Professor Sasaki}
+
+\date{February 27, 2017}
+
+\maketitle
+
+%\noindent
+%Prove the following statements. Show and explain \textbf{ALL} your work. Unless otherwise specified, give direct proofs.
+
+%%
+%% Problem 1
+%%
+
+\begin{problem}{1}[Let $P(n ) = 1^3 + 2^3 + \cdots + n^3 = \left(\frac{n(n+1)}{2}\right)^2$. Prove by induction that $\forall n \in \N \, (P(n))$.]
+
+\begin{proof}[Theorem]
+For every positive integer $n$,
+
+\begin{flalign*}
+& \sum_{j=1}^{k} j^3 = \left( \frac{n(n+1)}{2} \right)^2 && \qedhere
+\end{flalign*}
+\end{proof}
+
+\begin{proof}
+By induction on $n$,
+
+\textbf{Base case:} $n = 1$
+
+\begin{align*}
+& \sum_{j=1}^{1} j^3 = \left( \frac{1(1+1)}{2} \right)^2 \then 1^3 = \left( \frac{2}{2} \right)^2 \then 1 = 1
+\end{align*}
+
+$\therefore \, \sum_{j=1}^{1} j^3 = \left( \frac{1(1+1)}{2} \right)^2$
+
+\textbf{Inductive step:} Suppose that for positive integer $k$, $\sum_{j=1}^{k} j^3 = \left( \frac{n(n+1)}{2} \right)^2$, we will show that
+
+\begin{align*}
+\sum_{j=1}^{k+1} j^3 = \left( \frac{(k+1)(k+2)}{2} \right)^2
+\end{align*}
+
+Starting with the left side of the equation:
+
+\begin{align*}
+\sum_{j=1}^{k+1} j^3 &= \left( \sum_{j=1}^{k} j^3 \right) + (k + 1)^3 && \tt{by separating out the last term} \\
+&= \left( \frac{k(k+1)}{2} \right)^2 + (k + 1)^3 && \tt{by the inductive hypothesis} \\
+&= \frac{k^2 (k+1)^2}{4} + \frac{4 (k+1)^3}{4} \\
+&= \frac{k^2 (k+1)^2 + 4 (k+1)^3}{4} \\
+&= \frac{(k+1)^2 \left(k^2+4 (k+1)\right)}{4} \\
+&= \frac{(k+1)^2 \left(k^2+4 k+4\right)}{4} \\
+&= \frac{(k + 1)^2 (k + 2)^2}{4} \\
+&= \left( \frac{(k+1)(k+2)}{2} \right)^2 && \tt{by algebra}
+\end{align*}
+
+$\therefore \, \sum_{j=1}^{k+1} j^3 = \left( \frac{(k+1)(k+2)}{2} \right)^2$
+\end{proof}
+\end{problem}
+
+
+%%
+%% Problem 2
+%%
+
+\begin{problem}{2}[Determine whether each of the proposed definitions is a valid recursive definition of a function $f$ from the set of non-negative integers to the set of integers. If $f$ is well defined, find a formula for $f(n)$ when $n$ is a non-negative integer and prove that your formula is valid.]
+
+\begin{enumerate}[(a)]
+
+%%
+%% Problem 2(a)
+
+\item $f(0) = 1, f(n) = -f(n - 1)$ for $n \geq 1$
+
+This is a valid recursive definition of a function $f$.
+
+A valid formula for $f(n)$ is
+
+\begin{align*}
+& f(n) = (-1)^n
+\end{align*}
+
+\begin{proof}
+By induction on $n$,
+
+\textbf{Base case:} $n = 0$
+
+\begin{align*}
+f(0) &= (-1)^0 \\
+1 &= 1
+\end{align*}
+
+$\therefore \, f(0) = (-1)^0 = 1$
+
+\textbf{Inductive step:} Suppose $f(n) = -f(n - 1) = \left(-1\right)^n$ for $n \geq 1$, we will show that:
+
+\begin{align*}
+f(n) = -f(n - 1) = {(-1)}^n
+\end{align*}
+
+Since,
+
+\begin{align*}
+f(n) &= -f(n - 1) \\
+&= -(-1)^{(n-1)} && \tt{by the inductive hypothesis} \\
+&= -\frac{{(-1)}^n}{(-1)^1} \\
+&= (-1)^n
+\end{align*}
+
+$\therefore \, f(n) = \left(-1\right)^n $ for $n \geq 0$.
+\end{proof}
+
+
+%%
+%% Problem 2(b)
+
+\item $f(0) = 1, f(1) = 0, f(2) = 2, f(n) = 2f(n - 3)$ for $n \geq 3$
+
+This is a valid recursive definition of a function $f$.
+
+A valid formula for $f(n)$ is
+
+\begin{align*}
+& g(n) =
+  \begin{cases}
+   1 & n = 0 \\
+   0 & (n \bmod 3) = 1 \\
+   2^{\left\lfloor (n-1)/3\right\rfloor +1} & (n > 1) \text{ and } ((n \bmod 3) \neq 1)
+  \end{cases}
+\end{align*}
+
+\begin{proof}
+By induction on $n$,
+
+\textbf{Base case:} $n = 0$\\
+\begin{align*}
+f(0) = g(0) \then 1 = 1 && g(0) \implies (n = 0) \equiv (0 = 0) \equiv \text{T}
+\end{align*}
+$\therefore \, f(0) = 1 = g(0)$
+
+\textbf{Base case:} $n = 1$\\
+\begin{align*}
+f(1) &= g(1) \\
+0 &= 0 && g(1) \implies ((n \bmod 3) = 1) \equiv ((1 \bmod 3) = 1) \equiv (1 = 1) \equiv \text{T}
+\end{align*}
+$\therefore \, f(1) = 0 = g(1)$
+
+\textbf{Base case:} $n = 2$. Show that $f(2) = 2 = g(n)$.\\
+\begin{align*}
+f(2) &= g(2) \\
+&= 2^{\left\lfloor (n-1)/3\right\rfloor +1} & \text{  since } g(2) \implies ((n > 1) \land ((n \bmod 3) \neq 1)) \\
+& & \equiv ((2 > 1) \land ((2 \bmod 3) \neq 1)) \\
+& & \equiv (\T \land (2 \neq 1)) \\
+& & \equiv (\T \land \T) \\
+& & \equiv \T \\
+&= 2^{\left\lfloor (2-1)/3\right\rfloor +1} \\
+&= 2^{\left\lfloor 1/3\right\rfloor +1} \\
+&= 2^{0+1} \\
+&= 2
+\end{align*}
+$\therefore \, f(1) = 0 = g(1)$
+
+
+\textbf{Inductive step:} Suppose $f(n) = g(n)$ for $n > 1 \text{ and } (n \bmod 3) \neq 1$, we will show that:
+
+\begin{align*}
+f(n) &= g(n) && \text{for } n > 1 \text{ and } (n \bmod 3) \neq 1 \\
+2f(n - 3) &= 2^{\left\lfloor (n-1)/3\right\rfloor +1} && \text{for } n > 1 \text{ and } (n \bmod 3) \neq 1
+\end{align*}
+
+Since,
+
+\begin{align*}
+2f(n - 3) &= 2^{\left\lfloor (n-1)/3\right\rfloor +1}
+\end{align*}
+
+$\therefore \, f(n) = g(n)$ for $n > 1 \text{ and } (n \bmod 3) \neq 1$.
+\end{proof}
+
+
+%%
+%% Problem 2(c)
+
+\item $f(0) = 0, f(1) = 1, f(n) = 2f(n + 1)$ for $n \geq 2$
+
+This is not a valid recursive definition since $f(n)$ refers to $f(n + 1)$ which will then refer to $f(n + 2)$ and so on.
+
+
+%%
+%% Problem 2(d)
+
+\item $f(0) = 0, f(1) = 1, f(n) = 2f(n - 1)$ for $n \geq 1$
+
+This is a valid recursive definition of a function $f$.
+
+A valid formula for $f(n)$ is 
+
+\begin{align*}
+& g(n) =
+  \begin{cases}
+    0 & n = 0 \\
+    2^{n-1} & n \geq 1
+  \end{cases}
+\end{align*}
+
+\begin{proof}
+By induction on $n$,
+
+\textbf{Base case:} $n = 0$
+
+\begin{align*}
+f(0) &= g(0) \\
+0 &= 0 && g(0) \implies (n = 0) \equiv (0 = 0) \equiv \text{T} 
+\end{align*}
+$\therefore \, f(0) = g(0) = 0$
+
+\textbf{Base case:} $n = 1$
+
+\begin{align*}
+f(1) &= g(1) \\
+1 &= 2^{n-1} && g(1) \implies (n = 0) \equiv (0 = 0) \equiv \text{T} \\
+1 &= 2^{1-1} \\
+1 &= 2^{0} \\
+1 &= 1
+\end{align*}
+$\therefore \, f(1) = g(1) = 1$
+
+\textbf{Inductive step:} Suppose $f(n) = g(n)$ for $n \geq 1$, we will show that:
+
+\begin{align*}
+f(k + 1) &= g(k + 1) = 2^{k}
+\end{align*}
+
+Since,
+
+\begin{align*}
+f(k + 1) &= g(k + 1) && \tt{by the inductive hypothesis} \\
+&= 2^{(k + 1) -1} && g(k + 1) \implies (k + 1 \geq 1) \equiv (k \geq 0) \equiv \text{T}  \\
+&= 2^{k} \\
+\end{align*}
+$\therefore \, f(n) = g(n)$ for $n \geq 1$.
+\end{proof}
+\end{enumerate}
+\end{problem}
+
+%%
+
+%%
+%% Problem 3
+%%
+
+\begin{problem}{3}[Give a recursive definition of the sequence $\{a_n\}, n = 1, 2, 3, \dots$ if]
+
+\begin{enumerate}[(a)]
+
+%%
+%% Problem 3(a)
+
+\item $a_n = 4n - 2$\\
+\begin{align*}
+f(n) = 4n - 6
+\end{align*}
+
+%%
+%% Problem 3(b)
+
+\item $a_n = 1 + (-1)^n$ \\
+\begin{align*}
+f(n) = 1 + (-1)^n
+\end{align*}
+
+%%
+%% Problem 3(c)
+
+\item $a_n = n(n + 1)$ \\
+\begin{align*}
+f(n) = n^2 - n
+\end{align*}
+
+%%
+%% Problem 3(d)
+
+\item $a_n = n^2$ \\
+\begin{align*}
+f(n) = n^2 - 2n + 1
+\end{align*}
+
+\end{enumerate}
+\end{problem}
+
+
+%%
+%% Problem 4
+%%
+
+\begin{problem}{4}[Give a recursive definition]
+
+%%
+%% Problem 4(a)
+
+\begin{enumerate}[(a)]
+
+\item the set of odd positive integers. \\
+\begin{align*}
+f(1) = 1, f(n) = f(n - 1) + 2
+\end{align*}
+
+\end{enumerate}
+\end{problem}
+
+
+%%
+%% Problem 5
+%%
+
+\begin{problem}{5}[Give a recursive algorithm for finding the maximum of a finite set of integers, making use of the fact that the maximum of $n$ is the larger of the last integer in the list and the maximum is the larger of last integer in the list and the maximum of the first $n-1$ integer in the list.]
+
+\begin{lstlisting}
+def max(xs: List<Int>, cur: Int) where xs.length >= 1:
+    def f(xs: List<Int>, cur: Int) where xs.length >= 1:
+       if xs.length == 0:
+           return cur
+       else:
+          let x = xs[xs.length - 1]
+          let rest = xs[0..(xs.length - 2)]
+          if x > cur:
+             return max(rest, x)
+          else
+             return max(rest, cur)
+     return f(xs, xs[0])
+\end{lstlisting}
+\end{problem}
+
+
+%%
+%% Problem 6
+%%
+
+\begin{problem}{6}[Devise a recursive algorithm to find $a^{2^n}$, where $a$ is a real number and $n$ is a positive integer.]
+
+Let $f(a, n)$ where $a \in \R$ and $n \in \N$ represent the expression $a^{2^n}$. \\
+Let $\text{exp}(a, n)$ where $a \in \R$ and $n \in \N$ represent the expression $a^n$.
+
+\begin{align*}
+& \text{exp}(a, 1) = a \\
+& \text{exp}(a, n) = a * \text{exp}(a, n - 1) \\
+& f(a, n) = \text{exp}(a, \text{exp}(2, n))
+\end{align*}
+\end{problem}
+
+
+%%
+%% Problem 7
+%%
+
+\begin{problem}{7}[Give a recursive algorithm for computing $n*a$ ("n times a") using addition, where $n$ is a positive integer and $a$ is a real number.]
+
+Let $f(n, a)$ where $n \in \N$ and $a \in \R$ represent the expression $n * a$.
+
+\begin{align*}
+& f(1, a) = a \\
+& f(n, a) = a + f(n - 1, a)
+\end{align*}
+\end{problem}
+
+
+%%
+%% Problem 8
+%%
+
+\begin{problem}{8}[Write the algorithm and the loop invariant (for the outer loop) for the iterative version of Bubble Sort and prove all three cases (Initialization, Maintenance, Termination).]
+
+\begin{lstlisting}
+def bubble_sort(xs: List):
+    let n = xs.length
+    let didSwap = true
+    while didSwap:
+        for x in {0..n-1}:
+            if xs[i] > xs[i + 1]:
+                let temp = xs[i]
+                xs[i] = xs[i+1]
+                xs[i+1] = temp
+                didSwap = true
+\end{lstlisting}
+\end{problem}
+
+\end{document}

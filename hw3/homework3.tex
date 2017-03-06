@@ -1,0 +1,222 @@
+\documentclass{homework}
+\usepackage{listings}
+
+\lstset{
+  basicstyle=\ttfamily,
+  mathescape,         
+  literate={->}{$\rightarrow$}{2}
+           {ε}{$\varepsilon$}{1}
+}
+
+\begin{document}
+
+\title{Homework 3}
+\author{Josh Bowden\vspace*{8pt}\\
+CS 330 - Discrete Structures\\
+Professor Sasaki}
+
+\date{February 20, 2017}
+
+\maketitle
+
+%\noindent
+%Prove the following statements. Show and explain \textbf{ALL} your work. Unless otherwise specified, give direct proofs.
+
+
+\begin{problem}{1}[Describe an algorithm to find the longest word in an English sentence (where a sentence is a sequence of symbols, either a letter or a blank, which can then be broken into alternating words and blanks).]
+
+\begin{lstlisting}
+start := -1
+end := -1
+max := 0
+counter := 0
+For i := 0 to n
+   symbol := $\texttt{sentence}_\texttt{i}$
+   If (symbol is a letter)
+      If (counter == 0)
+         start = i
+      End-If 
+      counter := counter + 1
+   Else // symbol must be a blank
+      If (counter > max)
+         max := counter
+         end := i
+      End-If
+      counter := 0
+   End-If
+End-For
+\end{lstlisting}
+
+The longest word in the sentence will be the symbols including within indices \texttt{start} and \texttt{end} exclusively.
+\end{problem}
+
+%%
+
+\begin{problem}{2}[The ternary search algorithm locates an element in a list of increasing integers by successively splitting the list into three sub-lists of equal (or as close to equal as possible) size, and restricting the search to the appropriate piece. Specify the steps of this algorithm.]
+
+\begin{enumerate}[(1)]
+
+\item Let $x$ be the integer to search for.
+
+\item Let $L$ be a list of $n$ elements.
+
+\item Let $\Delta n = n \char`\\ 3$ (where `$\char`\\$' denotes integer division)
+
+\item Let $\Lambda_1$, $\Lambda_2$, and $\Lambda_3$ denote the three sub-lists of near equal length, \\
+where $\Lambda_1$ is the elements of $L_0$ to $L_{\Delta n}$, \\
+and $\Lambda_2$ is the elements of $L_{\Delta n + 1}$ to $L_{2 \Delta n}$, \\
+and $\Lambda_3$ is the elements of $L_{2 \Delta n + 1}$ to $L_{n}$. \\
+
+\item Compare the first last item in $\Lambda_1$ and the first item in $\Lambda_3$.
+
+\item Repeat the process by restarting at Step 1 where $L = \Lambda_i$ with the containing $\Lambda$ list.
+\end{enumerate}
+
+\end{problem}
+
+%%
+
+\begin{problem}{3}[Use the definition of Big-O to show that $(x^2 + 2x) / (2x + 1)$ is $O(x^2)$.]
+
+\begin{proof}
+Given,
+
+\begin{flalign*}
+f(x) &= (x^2 + 2x) / (2x + 1) \\
+g(x) &= x^2
+\end{flalign*}
+
+By definition, for $f(x)$ to be $O(g(x))$, $f(n) \leq c \cdot g(n)$ for positive constants $c$ and $n_0$ such that $n \geq n_0$.
+
+Then,
+
+\begin{flalign*}
+& \frac{f(n)}{g(n)} < 1 \\
+& \implies \frac{(n^2 + 2n) / (2n + 1)}{n^2} < 1 \\
+& \implies \frac{n^2 + 2n}{n^2(2n + 1)} < 1 \\
+& \implies \frac{n^2}{n^2(2n + 1)} + \frac{2n}{n^2(2n + 1)} < 1 \\
+& \implies \frac{1}{2n + 1} + \frac{2}{2n^2 + n} < 1 \tt{ for } n > 1
+\end{flalign*}
+
+$\therefore (x^2 + 2x) / (2x + 1)$ is $O(x^2)$.
+
+\end{proof}
+\end{problem}
+
+%%
+
+\begin{problem}{4}[Show that $x \log x$ is $O(x^2)$ but that $x^2$ is not $O(x \log x)$.]
+
+\everypar{\setlength\hangindent{1em}}
+\begin{proof}$O(x \log x) = O(x^2)$
+
+Under a similar premise from the previous proof,
+
+\begin{flalign*}
+& \frac{n \log n}{n^2} < 1 \\
+& \implies \frac{\log n}{n} < 1 \tt{ for } n > 1
+\end{flalign*}
+
+$\therefore x \log x$ is $O(x^2)$.
+\end{proof}
+
+\begin{proof}$O(x^2) \neq O(x \log x)$
+
+\begin{flalign*}
+& \frac{x^2}{x \log x} < 1 \\
+& \implies \frac{1}{\log x} \nless 1 \tt{ for any positive } n
+\end{flalign*}
+
+$\therefore x^2$ is not $O(x \log x)$.
+\end{proof}
+\end{problem}
+
+%%
+
+\begin{problem}{5}[Show that each of these pairs of functions are of the same order.]
+
+\begin{enumerate}[(a)]
+\item $\log_{10}(x^2 + 1), \log_2 x$ \\
+
+\begin{proof} $O(\log_{10}(x^2 + 1)) = O(\log_2 x) = O(n \log_10 n)$
+
+Since, $\log_{10}(x^2 + 1) \nless 1 \tt{ for any positive } n$, we'll assume the order of $O(n \log n)$.
+
+Then,
+
+\begin{flalign*}
+& \frac{ \log_{10}(n^2 + 1) }{n \log_{10} n} < 1 \tt{ for a positive } n
+\end{flalign*}
+
+$\therefore \log_{10}(x^2 + 1)$ is $O(n \log_{10} n)$.
+
+Given that the Change of Base Formula is,
+
+\begin{flalign*}
+& \log_a x = \frac{\log_b x}{\log_b a}
+\end{flalign*}
+
+Then, $\log_2 x = \frac{\log_{10} x}{\log_{10} 2}$.
+
+So,
+
+\begin{flalign*}
+& \frac{ \frac{\log_{10} n}{\log_{10} 2} }{n \log_{10} n} \\
+& \implies \frac{1}{n (\log_{10} 2)} < 1 \tt{ for a positive } n.
+\end{flalign*}
+
+$\therefore \log_{10}(x^2 + 1)$ is $O(n \log n)$.
+
+$\therefore O(\log_{10}(x^2 + 1)) = O(\log_2 x) = O(n \log_{10} n)$.
+\end{proof}
+
+\item $\log_{10} x, \log_2 x$
+\end{enumerate}
+
+\end{problem}
+
+%%
+
+\begin{problem}{6}[(a) Given a real number $x$ and a positive integer $k$, determine the number of multiplications used to find starting with $x$ and successively squaring (to find $x^2, x^4, x^8$, and so on). (b) Is this a more efficient way to find $x$\tt{\^{}}(2\tt{\^{}}k) (where \^{} means exponentiation) than by multiplying $x$ by itself the appropriate number of times?]
+
+\begin{enumerate}[(a)]
+\item $log_2(k)$ operations of successive squaring
+\item Yes, since multiplying $x$ by itself takes $k$ operations
+\end{enumerate}
+\end{problem}
+
+%%
+
+\begin{problem}{7}[Determine the least number of comparisons (the best-case performance) needed]
+
+\begin{enumerate}[(a)]
+\item To find the maximum of a sequence of $n$ integers. \\
+$O(n)$ assuming an unsorted list since all integers within the list must be tested to ensure the maximum integer was obtained.
+
+\item To locate an element in a list of n terms using a binary search. \\
+$O(1)$ if the element is located on the first iteration.
+\end{enumerate}
+\end{problem}
+
+%%
+
+
+\begin{problem}{8}[Describe how the number of comparisons used in the worst case changes when the size of the list to be sorted
+doubles from $n$ to $2n$, where $n$ is a positive integer when these sorting algorithms are used.]
+
+\begin{enumerate}[(a)]
+\item The selection sort begins by finding the least element in the list. This element is swapped to the front. Then the least
+element among the remaining elements is found and swapped into the second position. This procedure is repeated
+until the entire list has been sorted.\\
+$n^2$ to $4n^2$
+
+\item The binary insertion sort is a variation of the insertion sort that uses a binary search technique rather than a linear
+search technique to identify the location to insert the $i$'th element in the correct place among the previously sorted
+elements. \\
+$n^2$ to $4n^2$
+\end{enumerate}
+
+\end{problem}
+
+
+\end{document}
